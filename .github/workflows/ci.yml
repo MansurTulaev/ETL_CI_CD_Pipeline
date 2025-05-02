@@ -54,7 +54,7 @@ jobs:
         run: zip -r etl_package.zip dags/ src/ docker-compose.yml requirements.txt
 
       - name: Upload ETL artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v3.1.3
         with:
           name: etl_artifact
           path: etl_package.zip
