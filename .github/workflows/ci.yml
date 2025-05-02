@@ -50,9 +50,3 @@ jobs:
 
       - name: Run unit tests
         run: pytest tests/ --disable-warnings
-
-      - name: Run ETL scripts manually
-        run: |
-          python src/extract.py
-          python src/transform.py
-          python src/load.py
