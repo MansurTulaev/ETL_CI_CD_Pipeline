@@ -42,8 +42,7 @@ jobs:
           pip install pytest
 
       - name: Init Airflow DB
-        run: |
-          airflow db init
+        run: airflow db init
 
       - name: Lint DAGs
         run: airflow dags list
@@ -53,7 +52,9 @@ jobs:
 
       - name: Archive ETL scripts
         run: zip -r etl_package.zip dags/ src/ docker-compose.yml requirements.txt
-      - uses: actions/upload-artifact@v3
+
+      - name: Upload ETL artifact
+        uses: actions/upload-artifact@v3
         with:
           name: etl_artifact
           path: etl_package.zip
