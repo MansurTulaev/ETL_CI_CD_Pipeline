@@ -50,3 +50,10 @@ jobs:
 
       - name: Run unit tests
         run: pytest tests/ --disable-warnings
+
+      - name: Archive ETL scripts
+        run: zip -r etl_package.zip dags/ src/ docker-compose.yml requirements.txt
+      - uses: actions/upload-artifact@v3
+        with:
+          name: etl_artifact
+          path: etl_package.zip
