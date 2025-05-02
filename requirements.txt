@@ -1,4 +1,5 @@
 boto3
 pandas
 great_expectations==0.18.10
+pytest
 # Airflow устанавливается отдельно с constraints-файлом!
