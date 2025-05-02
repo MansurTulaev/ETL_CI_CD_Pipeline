@@ -1,0 +1,46 @@
+# Python виртуальное окружение
+venv/
+.env/
+.venv/
+
+# Кэш и временные файлы Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Jupyter/IPython
+.ipynb_checkpoints/
+
+# Airflow
+logs/
+*.db
+airflow.cfg
+unittests.cfg
+
+# IDE/Editor
+.vscode/
+.idea/
+*.swp
+
+# MacOS/Linux
+.DS_Store
+Thumbs.db
+
+# LocalStack и Docker
+localstack/
+*.pid
+
+# Test output
+htmlcov/
+.tox/
+.coverage*
+.cache/
+.pytest_cache/
+nosetests.xml
+coverage.xml
+
+# Great Expectations (если не хочешь трекать runtime данные)
+great_expectations/uncommitted/
+
+# Пароли и чувствительные настройки (если случайно созданы)
+secrets.json

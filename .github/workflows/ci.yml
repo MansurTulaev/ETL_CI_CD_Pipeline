@@ -1,0 +1,55 @@
+name: ETL CI Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test-etl:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:13
+        env:
+          POSTGRES_USER: airflow
+          POSTGRES_PASSWORD: airflow
+          POSTGRES_DB: airflow
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U airflow"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.8"
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install apache-airflow==2.7.3
+
+      - name: Lint DAGs (airflow dags list)
+        run: |
+          airflow db init
+          airflow dags list
+
+      - name: Run unit tests
+        run: |
+          pytest tests/ --disable-warnings
+
+      - name: Run extract/transform/load manually
+        run: |
+          python src/extract.py
+          python src/transform.py
+          python src/load.py
